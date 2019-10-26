@@ -1,152 +1,238 @@
 <html>
-    <head>
-       <title></title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <style>
-            article{
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
-            button{
-                margin-top: 10px;
-            }
-        </style>
-    </head>
-    <body>
-      <!-- ================ 예제 1 ============== -->
-       <article class="box_s1">
-           <h2>show, hide</h2>
-           <div>
-               <img src="img/img1.jpg" alt="">
-           </div>
-           <button>hide</button>
-       </article>
-       <script>
-           $(function() {
-               //start
-               $('button').click(function () {
-                   $(this).toggleClass('on');
-                   console.log($(this).hasClass('on'));
-                   
-                   if ($(this).hasClass('on')) {
-                       $('.box_s1 div').hide();
-                       $(this).text('show');
-                   } else {
-                       $('.box_s1 div').show();
-                       $(this).text('hide');
-                   }
-               })
-               //end
-           });
-       </script>
-       
-       <!-- ================ 예제 2 ============== -->
-       <style>
-           .box_s2{
-               
-           } 
-           .box_s2 p:nth-of-type(1) img{
-               width: 400px;
-               height: 280px;
-           }
-           .box_s2 p:nth-of-type(2) img{
-               width: 100px;
-               height: 80px;
-           }
-       </style>
-       <article class="box_s2">
-           <h2>attr 활용</h2>
-           <div>
-               <p><img src="img/img1.jpg" alt=""></p>
-               <p>
-                   <img src="img/img1.jpg" alt="">
-                   <img src="img/img2.jpg" alt="">
-                   <img src="img/img3.jpg" alt="">
-               </p>
-           </div>
-       </article>
-       <script>
+
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        article {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- ================ 예제 1 ============== -->
+    <article class="box_s1">
+        <h2>show, hide</h2>
+        <div>
+            <img src="img/img1.jpg" alt="">
+        </div>
+        <button>hide</button>
+    </article>
+    <script>
+        $(function() {
+            //start
+            $('.box_s1 button').click(function() {
+                $(this).toggleClass('on');
+                console.log($(this).hasClass('on'));
+
+                if ($(this).hasClass('on')) {
+                    $('.box_s1 div').hide();
+                    $(this).text('show');
+                } else {
+                    $('.box_s1 div').show();
+                    $(this).text('hide');
+                }
+            })
+            //end
+        });
+
+    </script>
+
+    <!-- ================ 예제 2 ============== -->
+    <style>
+        .box_s2 {}
+
+        .box_s2 p:nth-of-type(1) img {
+            width: 400px;
+            height: 280px;
+        }
+
+        .box_s2 p:nth-of-type(2) img {
+            width: 100px;
+            height: 80px;
+        }
+
+    </style>
+    <article class="box_s2">
+        <h2>attr 활용</h2>
+        <div>
+            <p><img src="img/img1.jpg" alt=""></p>
+            <p>
+                <img src="img/img1.jpg" alt="">
+                <img src="img/img2.jpg" alt="">
+                <img src="img/img3.jpg" alt="">
+            </p>
+        </div>
+    </article>
+    <script>
         $(function() {
             $('.box_s2 p').eq(1).find('img').click(function() {
                 var imgSrc = $(this).attr('src');
                 console.log(imgSrc);
-                
+
                 $('.box_s2 p:first').eq(0).find('img').attr('src', imgSrc);
             });
         });
-       </script>
-       
-       <style>
-           .box_s3 p:nth-of-type(1){
-               position: fixed;
-               left: 0;
-               top: 0;
-               margin: 0;
-               width: 100%;
-               height: 100%;
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               background: rgba(0,0,0,0.8);
-           } 
-           .box_s3 p:nth-of-type(1) img{
-               width: 400px;
-               height: 280px;
-           }
-           .box_s3 p:nth-of-type(2) img{
-               width: 100px;
-               height: 80px;
-           }
-       </style>
-       <article class="box_s3">
-           <h2>attr(엘리먼트 속성) 활용2</h2>
-           <div>
-               <p><img src="img/img1.jpg" alt=""></p>
-               <p>
-                   <img src="img/img1.jpg" alt="">
-                   <img src="img/img2.jpg" alt="">
-                   <img src="img/img3.jpg" alt="">
-               </p>
-           </div>
-       </article>
-       
-       <script>
-           $(function() {
-               $('.box_s3 p:first').hide();
-               
-               $('.box_s3 p:first').click(function() {
-                   $(this).hide();
-               });
-               
-               $('.box_s3 p').eq(1).find('img').click(function() {
-                   //1) img 클릭하면 팝업 show
-                   $('.box_s3 p').eq(0).show();
-                   //2) 클릭한 썸네일의 이미지 주소 변수에 담기
-                   var imgSrc = $(this).attr('src');
-                   //3) 팝업창 안의 이미지 주소를 변수 값으로 변경
-                   $('.box_s3 p').eq(0).find('img').attr('src', imgSrc);
-               });
-           });
-       </script>
-       
-    </body>
+
+    </script>
+
+    <style>
+        .box_s3 p:nth-of-type(1) {
+            position: fixed;
+            left: 0;
+            top: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .box_s3 p:nth-of-type(1) img {
+            width: 400px;
+            height: 280px;
+        }
+
+        .box_s3 p:nth-of-type(2) img {
+            width: 100px;
+            height: 80px;
+        }
+
+    </style>
+    <article class="box_s3">
+        <h2>attr(엘리먼트 속성) 활용2</h2>
+        <div>
+            <p><img src="img/img1.jpg" alt=""></p>
+            <p>
+                <img src="img/img1.jpg" alt="">
+                <img src="img/img2.jpg" alt="">
+                <img src="img/img3.jpg" alt="">
+            </p>
+        </div>
+    </article>
+
+    <script>
+        $(function() {
+            $('.box_s3 p:first').hide();
+
+            $('.box_s3 p:first').click(function() {
+                $(this).hide();
+            });
+
+            $('.box_s3 p').eq(1).find('img').click(function() {
+                //1) img 클릭하면 팝업 show
+                $('.box_s3 p').eq(0).show();
+                //2) 클릭한 썸네일의 이미지 주소 변수에 담기
+                var imgSrc = $(this).attr('src');
+                //3) 팝업창 안의 이미지 주소를 변수 값으로 변경
+                $('.box_s3 p').eq(0).find('img').attr('src', imgSrc);
+            });
+        });
+
+    </script>
+
+    <style>
+        .box_s4 p {
+            position: relative;
+            width: 400px;
+            padding-bottom: 200px;
+        }
+
+        .box_s4 p img {
+            width: 100%;
+            height: 280px;
+            position: absolute;
+        }
+
+    </style>
+    <article class="box_s4">
+        <h2>fadeIn & fadeOut 활용</h2>
+        <div>
+            <p>
+                <img src="img/img1.jpg" alt="">
+                <img src="img/img2.jpg" alt="">
+                <img src="img/img3.jpg" alt="">
+            </p>
+            <p class="btn">
+                <button>prev</button>
+                <button>next</button>
+            </p>
+            
+        </div>
+    </article>
+    <script>
+        $(function() {
+            $('.box_s4 img').not(':first').hide();
+
+            var idx = 0;
+            var inter = '';
+
+            function loop() {
+                inter = setInterval(function() {
+                    $('.box_s4 img').eq(idx).fadeOut(1000);
+                    idx++;
+                    if (idx === $('.box_s4 img').length) idx = 0;
+                    $('.box_s4 img').eq(idx).fadeIn(1000);
+                }, 2000);
+            }
+            loop();
+            
+            $('.box_s4 div').on({
+                mouseover: function() {
+                    clearInterval(inter);
+                },
+                mouseout: function() {
+                    loop();
+                }
+            });
+            
+            function fade(pn) {
+                if(pn === 'next') {
+                    $('.box_s4 img').eq(idx).fadeOut(500);
+                    idx++;
+                    if (idx === $('.box_s4 img').length) idx = 0;
+                    $('.box_s4 img').eq(idx).fadeIn(500);
+                } else {
+                    $('.box_s4 img').eq(idx).fadeOut(500);
+                    idx--;
+                    if (idx === -3) idx = 0
+                    $('.box_s4 img').eq(idx).fadeIn(500);
+                    
+                }
+            }
+            
+            $('.btn button').click(function() {
+                var btnIdx = $(this).index();
+                
+                if(btnIdx){
+                    //next
+                    fade('next');
+                } else {
+                    //prev
+                    fade('prev');
+                }
+                console.log(idx);
+            });
+        });
+
+    </script>
+
+</body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
