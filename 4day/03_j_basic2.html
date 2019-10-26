@@ -208,7 +208,7 @@
                 } else {
                     $('.box_s4 img').eq(idx).fadeOut(500);
                     idx--;
-                    if (idx === -3) idx = 0
+                    if (idx === -$('.box_s4 img').length) idx = 0;
                     $('.box_s4 img').eq(idx).fadeIn(500);
                     
                 }
