@@ -1,0 +1,127 @@
+<html>
+    <head>
+       <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+       <ul>
+           <li>li => 전체 li</li>
+           <li>.선택자 => 클래스</li>
+           <li>#선택자 => id</li>
+           <li>.선택자, #선택자 => 2개의 선택자</li>
+       </ul>
+       <button type=button style="margin-top: 10px">초기화</button>
+       <div style="padding-top: 30px">클릭한 값</div>
+       
+       
+        <script>
+            
+        $(function() { //$(document).ready(function() {})랑 같은 뜻 
+            function style() {
+                $('ul li')
+                .css({
+                    borderBottom: '1px solid lightgrey', 
+                    padding: '10px 0'
+                })
+                .parent() //부모요소 선택, parents(): 모든 부모 요소
+                .css({
+                    listStyle: 'none', 
+                    padding: 0, 
+                    margin: 0
+                })
+                .find('li') // 엘리먼트 클래스, 아이디, 태그
+                .eq(2) //요소의 인덱스 숫자를 선택 가능
+                .css({
+                    color:'pink'
+                 })
+                .siblings() // 형제 요소
+                .filter(':nth-of-type(1)') // 필터링,처음, 마지막은 :first, :last 적어도 가능
+                .css({
+                    color: 'skyblue'
+                });
+            }
+            style();
+            
+            var arr= [];
+            
+            
+            /*
+                $('li').on({    //여러 메서드가 필요할 때
+                    click: function() {
+                        $(this).css({
+                            background: 'lightyellow'
+                        });
+                        $('li').not($(this)).css({
+                            background: 'white'
+                        });
+
+                        var txt = $(this).text();
+                        $('div').text(txt);
+
+                        arr.push(txt)
+                        //console.log(arr);
+                        $(this).remove();
+                    },
+                    mousein: function() {
+
+                    },
+                    mouseover: function() {
+
+                    }
+                });
+            */
+            
+            $('ul').on('click', 'li', function() {
+                $(this).css({
+                        background: 'lightyellow'
+                    });
+                $(this).not($(this)).css({
+                        background: 'white'
+                    });
+                    
+                    var txt = $(this).text();
+                    $('div').text(txt);
+                    
+                    arr.push(txt)
+                    console.log(arr)
+                    $(this).remove();
+            })
+            
+            $('button').click(function() {
+                var li = '';
+                arr.forEach(function(v) {
+                   li += '<li>' + v + '</li>';
+                }); 
+                $('ul').html(li);
+                style();
+                arr = [];
+            });
+           console.log(arr);
+            
+            
+        });
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

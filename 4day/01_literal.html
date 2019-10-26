@@ -1,0 +1,104 @@
+<html>
+   <head>   
+   </head>
+    <body>
+        <h1>선택자</h1>
+        <div id="sel"></div>
+        <div class="cls"></div>
+        <ul>
+            <li class="a">01</li>
+            <li>02</li>
+            <li class="a">03</li>
+        </ul>
+        
+        <script>
+            //하나의 엘리먼트
+            document.getElementById('sel');
+            document.querySelector('.cls');
+            document.querySelector('h1');
+            
+            //복수 엘리먼트
+            var li = document.getElementsByTagName('li');
+            var a = document.querySelectorAll('.a');
+            
+            for (var i=0; i<a.length; i++) {
+                a[i].addEventListener('click', function() {
+                   console.log('click a'); 
+                });
+            }
+            
+            for(var j=0; j<li.length; j++) {
+                li[j].addEventListener('click', function() {
+                    console.log('click li');
+                })
+            }
+            var arr = [10, 20, 30];
+            arr[0] = 11;
+            
+            
+            arr.push(); //뒤쪽에 데이터 삽입
+            arr.pop(); //뒤쪽 데이터 삭제
+            arr.shift(); //앞쪽 데이터 삽입
+            arr.unshift(); //앞쪽 데이터 삭제
+            arr.slice(1,2); //20
+            arr.splice(1); //20 30
+            
+            console.log(arr);
+            
+            arr.forEach(function() {
+                
+            });
+            
+            function fun(매개변수) {
+                console.log('명령문 실행');
+                return '명령문 실행';
+            }
+            var a = fun(0);
+            
+            
+            var sel = document.querySelector('#sel');
+            sel.innerHTML = '<p></p>';
+            
+            //객체를 선언하는 방법
+            var obj = new Object();
+            
+            var sum = 0;
+            var obj = {
+                'kor': 80,
+                'eng': 50,
+                //key: value
+                //key 값은 항상 문자로 처리
+                'total': function(){ //메서드
+                    sum = this.kor + this.eng;
+                } 
+            };
+            obj.total();    //메서드 실행
+            
+            document.write(sum);
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
