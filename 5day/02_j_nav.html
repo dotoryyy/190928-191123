@@ -4,38 +4,127 @@
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
-        article {
+        header.s5 {
+            position: fixed;
+            background: #000;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+        header.s5 ul {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+        header.s5 ul li>a {
+            padding: 20px 0;
+            width: 100%;
+            color: #fff;
+            display: inline-block;
+        }
+        header.s5 ul .active a {
+            color: skyblue;
+        }
+        section.s5 div{
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            width: 100%;
             height: 100vh;
-            margin-bottom: 100px;
+            font-size: 5em;
+        }
+        aside {
+            position: fixed;
+            right: 5%;
+            top: 48%;
+        }
+        aside a {
+            display: block;
+            margin: 10px 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: gray;
+            cursor: pointer;
+        }
+        aside a.active {
+            background-color: skyblue;
+        }
+        .quick {
+            position: absolute;
+            left: 5%;
+            top: 10%;
+            width: 100px;
+            height: 200px;
+            background: skyblue;
+            border-radius: 100px;
+            transition: .5s;
         }
         
-        button {
-            margin-top: 10px;
-        }
     </style>
 </head>
 
 <body>
-    <article class="s5">
-        <h1>Navigation</h1>
+    <header class="s5">
         <ul>
-            <li><a href="Navi01"></a></li>
-            <li><a href="Navi02"></a></li>
-            <li><a href="Navi03"></a></li>
+            <li class="active"><a href="#">Navi01</a></li>
+            <li><a href="#">Navi02</a></li>
+            <li><a href="#">Navi03</a></li>
         </ul>
-    </article>
+    </header>
     
-    <section>
+    <section class="s5">
         <div>contents01</div>
         <div>contents02</div>
         <div>contents03</div>
     </section>
     
+    <aside>
+<!--
+        <a></a>
+        <a></a>
+        <a></a>
+-->
+    </aside>
+    
+    <div class="quick"></div>
+    
+    <script>
+        $(function() {
+            var liNum = $('header li').length,
+            // li갯수 만큼 '<a></a>' 태그를 생성하여 변수에담으시오.
+                $a = '';
+            
+            for (var i=0; i<liNum; i++) {
+                $a += '<a></a>'
+            }
+            // aside에 html()메소드를 활용하여 생성한 변수를 넣으시오.
+            $('aside').html($a);
+            
+            $('header li, aside a').on({
+               click: function(e) {
+                   e.preventDefault;
+                   var idx = $(this).index();
+                   var conH = $('section div').eq(idx).offset().top;
+                   
+                   console.log(conH);
+                   
+                   $('html, body').animate({scrollTop: conH});
+                   
+                   $('header li').not($(this)).removeClass('active');
+                   $('aside a').not($(this)).removeClass('active');
+                   $(this).addClass('active');
+               }  
+           })
+            $(window).scroll(function () {
+                var qTop = $(this).scrollTop();
+                
+                $('.quick').css({top: qTop + 200});
+            });
+            
+            
+        });
+    </script>
     
 </body>
 
