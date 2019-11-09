@@ -1,0 +1,287 @@
+<html>
+
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        article {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+        }
+        .s1 p img {
+            width: 400px;
+        }
+        .s1 span img {
+            width: 90px;
+            height: 70px;
+        }
+        .s1 div {
+            position: relative;
+        }
+        .s1 p {
+            position: absolute;
+            border: 10px solid red;
+            left: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            
+        }
+        .s2 img{
+            width: 400px;
+            height: 260px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <article class="s1">
+        <h1>Position 활용</h1>
+        <div>
+            <p></p>
+            <span>
+                <img src="img/img1.jpg" alt="">
+                <img src="img/img2.jpg" alt="">
+                <img src="img/img3.jpeg" alt="">
+            </span>
+        </div>
+    </article>
+    <script>
+        $(function() {
+            var $imgW, $imgH, $imgT, $imgL;
+            
+            $('.s1 img').on({
+               mouseenter : function() {
+                 $imgW = $(this).width();
+                 $imgH = $(this).height();
+                 $imgT = $(this).position().top;
+                 $imgL = $(this).position().left;
+                 
+                 $('.s1 p').animate({
+                     width: $imgW,
+                     height: $imgH,
+                     left:$imgL,
+                     top: $imgT
+                 })
+               }
+            });    
+        });
+    </script>
+    
+    <article class="s2">
+        <h1>Mousemove 활용</h1>
+        <div>
+            <img src="img/img1.jpg" alt="">
+        </div>
+    </article>
+    
+    <script>
+        $(function() {
+            var t = 0;
+           $('.s2 img').on('mousemove', function() {
+               //이미지의 주소값을 변경
+               t++;
+               
+               var ran = Math.ceil(Math.random()*9);
+               var imgSrc = $('.s2 img').attr('src');
+               var s = imgSrc.substr(imgSrc.indexOf('.')-1,1);
+               var $random = imgSrc.replace(s, ran)
+               
+               function change() {
+                   $('.s2 img').attr('src', $random);
+               }
+               
+               if (t%30 === 0 ) {
+                   change();
+                   console.log(t)
+               }
+           }) 
+        });
+    </script>
+    
+    <style>
+        .s3 div{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 1000px;
+        }
+        .s3 img {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+    <article class="s3">
+        <h1>remove() 활용</h1>
+        <p>
+            <button>all</button>
+            <button>web</button>
+            <button>app</button>
+            <button>etc</button>
+        </p>
+        <div>
+           <p class="web"><img src="img/img1.jpg" alt=""></p>
+           <p class="etc"><img src="img/img2.jpg" alt=""></p>
+           <p class="etc"><img src="img/img3.jpg" alt=""></p>
+           <p class="app"><img src="img/img4.jpg" alt=""></p>
+           <p class="web"><img src="img/img5.jpg" alt=""></p>
+           <p class="etc"><img src="img/img6.jpg" alt=""></p>
+           <p class="app"><img src="img/img7.jpg" alt=""></p>
+           <p class="web"><img src="img/img8.jpg" alt=""></p>
+           <p class="etc"><img src="img/img9.jpg" alt=""></p>
+        </div>
+    </article>
+    
+    <script>
+        $(function() {
+            var all = $('.s3 div').html();
+            
+            $('.s3 button').on('click', function() {
+                var btn = $(this).text();
+                $('.s3 div').html(all);
+                    
+                    $('.s3 div p').each(function(i) {
+                    var a = $(this).attr('class');
+                    if (btn != a && btn !='all') {
+                        $(this).remove();
+                    }
+                });    
+            })
+        });
+    </script>
+    
+    <style>
+        .s4 div{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 1000px;
+            //height: 70vh;
+            position: relative;
+        }
+        .s4 img {
+            width: 300px;
+            height: 200px;
+        }
+        .s4 div p{
+            position: absolute;
+            overflow: hidden;
+            margin: 0;
+            left: 0%;
+            top: 0%;
+            transition: .5s;
+        }
+    </style>
+    <article class="s4">
+        <h1>filter &amp; sort 활용</h1>
+        <p>
+            <button>all</button>
+            <button>web</button>
+            <button>app</button>
+            <button>etc</button>
+        </p>
+        <div>
+           <p class="web"><img src="img/img1.jpg" alt=""></p>
+           <p class="etc"><img src="img/img2.jpg" alt=""></p>
+           <p class="etc"><img src="img/img3.jpg" alt=""></p>
+           <p class="app"><img src="img/img4.jpg" alt=""></p>
+           <p class="web"><img src="img/img5.jpg" alt=""></p>
+           <p class="etc"><img src="img/img6.jpg" alt=""></p>
+           <p class="app"><img src="img/img7.jpg" alt=""></p>
+           <p class="web"><img src="img/img8.jpg" alt=""></p>
+           <p class="etc"><img src="img/img9.jpg" alt=""></p>
+        </div>
+    </article>
+    
+    <script>
+        $(function() {
+            var all = $('.s4 div').html();
+            
+            function sort() {
+                var cl = 0, ct = 0, j = -1, k = 0;
+                $('.s4 div p').each(function(i) {
+                   j++;
+
+                   if (i%3 == 0 && i != 0) {
+                       k++; j = 0;
+                       
+                   } else {
+                       ct = 240 * k; // 0 1 2       줄   top
+                       cl = 340 * j; // 012 012 012 한줄  left
+                       //0이 왜 안나옴???
+                       
+                       console.log(k, j)
+                   }
+                   $(this).css({
+                       left: cl,
+                       top: ct
+                   });
+               }) ;
+            };
+            sort();
+            
+            
+            $('.s4 button').on('click', function() {
+                var btn = $(this).text();
+                $('.s4 div').html(all).hide().fadeIn();
+                setTimeout(function() {
+                    $('.s4 div p').each(function(i) {
+                        var a = $(this).attr('class');
+                        if (btn != a && btn !='all') {
+                            $(this).remove();
+                        }
+                    });
+                    sort();
+                }, 1);
+            });
+            
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        article {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+   
+   <style>
+       .s5 div{
+           width: 400px;
+           height: 250px;
+           position: relative;
+           overflow: hidden;
+       }
+       .s5 div p{
+           position: absolute;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+       }
+       .s5 div p img{
+           position: absolute;
+           width: 100%;
+           height: 100%;
+       }
+       
+       .s5 span a {
+           display: inline-block;
+           width: 15px;
+           height: 10px;
+           margin: 10px 5px;
+           background: #ddd;
+           transition: .5s;
+       }
+       
+       .s5 span a.active {
+           background: skyblue;
+           transform: scaleX(2);
+       }
+    </style>
+    <article class="s5">
+        <h1>slide(after, before, clone)활용</h1>
+        <p>
+            <button>prev</button>
+            <button>next</button>
+        </p>
+        <div>
+           <p class="web">
+               <img src="img/img1.jpg" alt="">
+               <img src="img/img2.jpg" alt="">
+               <img src="img/img3.jpg" alt="">
+           </p>
+        </div>
+        <span>
+        </span>
+    </article>
+    <script>
+        $(function() {
+            var idx = 1;
+            var after = '', before = '', $indi = '';
+            after = $('.s5 img:first').clone();
+            before = $('.s5 img:last').clone();
+            
+            //indicator
+            $('.s5 img').each(function() {
+               $indi += '<a></a>';
+            });
+            $('.s5 span').html($indi);
+            $('.s5 span a:first').addClass('active');
+            
+            //copy baner
+            $('.s5 img:last').after(after);
+            $('.s5 img:first').before(before);
+            
+            $('.s5 img').each(function(i) {
+               $(this).css({left: 100 * i + '%'})
+            });
+            
+            $('.s5 div p').css({left:'-100%'});
+            
+            $('.s5 p button').on('click', function() {
+               $(this).index() == 0 ? idx-- : idx++;
+                console.log(idx, -400 * idx);
+               ani();
+            });
+            
+            function ani() {
+                $('.s5 p').animate({
+                    left: -400 * idx
+                }, function() {
+                    if(idx == 4) {
+                        idx = 1;
+                        update();
+                    } else if (idx == 0) {
+                        idx = 3;
+                        update();
+                    }
+                    
+                    $('.s5 span a').removeClass('active');
+                    $('.s5 span a').eq(idx-1).addClass('active');
+
+                });
+                
+                function update() {
+                    setTimeout(function() {
+                        $('.s5 p').css({left: -100 * idx + '%'});  
+                    },1);
+                };
+            }
+            
+            //술라이더 완성해보기
+            
+        });
+    </script>
+    
+    <style>
+        .s6 div{
+            position: relative;
+            width: 400px;
+            height: 250px;
+        }
+        .s6 div p{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+        .s6 img{
+            position: absolute;
+            width: 400px;
+            height: 250px;;
+        }
+    </style>
+    <article class="s6">
+        <h1>drag(draggable, dropable) 활용</h1>
+        <div>
+           <p class="web">
+               <img src="img/img1.jpg" alt="">
+               <img src="img/img2.jpg" alt="">
+               <img src="img/img3.jpg" alt="">
+           </p>
+        </div>
+        <span></span>
+    </article>
+    
+    <script>
+        $(function () {
+            var dIdx = 0;
+            $('.s6 div p img').each(function(i) {
+               $(this).css({left: 100 * i + '%'})
+                console.log(i);
+            });
+            
+            
+            var csX = 0, dgX = 0;
+            
+            function dragAni() {
+                $('.s6 p').animate({
+                    left: -400 * dIdx
+                })
+            }
+            
+            
+            
+            
+            $('.s6 p').draggable({
+                axis: 'x',
+                revert: function() {
+                    if (csX > dgX) {
+                        dIdx++;
+                        
+                        //return true;
+                        //console.log('좌' + (csX - dgX))
+                    } else {
+                        dIdx--;
+                        //console.log('우' + (dgX - csX))
+                    }
+                    dragAni();
+                },
+                //containment: '.s6 div',
+                start: function(e) {
+                    csX = e.pageX;
+                },
+                drag: function(d) {
+                    dgX = d.pageX
+                },
+                stop: function() {
+                }
+                
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
