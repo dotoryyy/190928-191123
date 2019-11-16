@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    <item>
+        <imgSrc>p01.jpg</imgSrc>
+        <detail>이미지제목 01</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p02.jpg</imgSrc>
+        <detail>이미지제목 02</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p03.jpg</imgSrc>
+        <detail>이미지제목 03</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p04.jpg</imgSrc>
+        <detail>이미지제목 04</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p05.jpg</imgSrc>
+        <detail>이미지제목 05</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p06.jpg</imgSrc>
+        <detail>이미지제목 06</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p07.jpg</imgSrc>
+        <detail>이미지제목 07</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p08.jpg</imgSrc>
+        <detail>이미지제목 08</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    <item>
+        <imgSrc>p09.jpg</imgSrc>
+        <detail>이미지제목 09</detail>
+        <color>#f00, #ff0, #00f</color>
+    </item>
+    
+</items>

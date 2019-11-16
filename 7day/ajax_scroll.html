@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        
+        
+        
+    </head>
+
+<body>
+
+    <style>
+        *{box-sizing:border-box;}
+        article{
+            align-items: center;
+            width:1400px;
+            margin:200px auto;
+        }
+        .s1 span{
+            width:100%;
+            display:flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .s1 div span img{
+            width:30%; height:300px;
+            margin:50px 0;
+        }
+        p i {
+           display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+        .loading {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    
+    
+    <article class="s1">
+        <h1>Ajax 활용</h1>
+        <div>
+            <span>
+                <!--<img src="p01.jpg">
+                <img src="p02.jpg">
+                <img src="p03.jpg">-->
+            </span>
+        </div>
+        <p>데이터 더보기</p>
+    </article>
+    
+    <div class="loading">
+        <img src="loading.gif" alt="">
+    </div>
+    
+<script>
+$(function(){
+   //start
+    $.ajax({
+    url:'data2.xml',
+    dataType:'xml',
+    type : 'get',
+    beforeSend:function(){
+        $('.loading').fadeIn();
+    },
+    success : function(data){
+var imgUrl = '',tag='',j=3,
+    detail='',color='';
+var count = $(data).find('item').length;
+
+function dataXml(){
+    tag = '';
+    $(data).find('item').each(function(i){
+        
+        imgUrl = $(this).find('imgSrc').text();
+        detail = $(this).find('detail').text();
+        color = $(this).find('color').text();
+
+        if(i < j){
+            tag += "<img src='"+imgUrl+"'>";
+            $('.s1 span').html(tag);
+        }
+        if(i == current){
+            colorTag = color.split(',');
+            
+            var aa = '';
+            colorTag.forEach(function(y) {
+                aa += "<i style='background:"+y+"'>"+y+"</i>";
+            });
+            
+            var info = detail + colorTag[0];
+            
+            $('.s1').css({
+                background:colorTag[0]
+            });
+            
+            $('p').html(info);
+        }
+        //i =  xml item index
+        //current =html img index
+    });
+} dataXml();//fun end
+
+var current = 0;
+$('.s1').on('click','img',function(){
+    current = $(this).index();
+    dataXml();
+});
+        
+
+
+$(window).on('scroll',function(){
+    var dataH = $('.s1').height() - 400;
+    if($(this).scrollTop() > dataH){
+        j += 3;
+        dataXml();
+    }
+
+});
+    },
+    complete : function(){
+        $('.loading').fadeOut();
+    },
+    error : function(){
+        alert('error');
+    }
+});
+
+    //end
+});
+</script>
+    
+</body>
+</html>
+
+
